@@ -54,7 +54,7 @@ public class CommandTalk implements ICommand {
                 tasknumber = ThreadLocalRandom.current().nextInt(0, tasks.length);
                 figure.setCurrentTask(tasks[tasknumber]);
                 navratovytext += figure.getText() + "\n" + figure.getVoiceLines().get("task" + String.valueOf(figure.getTalkTimes())) + figure.getCurrentTask() + 
-                "\n" + String.valueOf(figure.getCompletedTasks()) + "/" + String.valueOf(figure.getTasksToComplete());
+                "\n" + "Splnené úlohy : " + String.valueOf(figure.getCompletedTasks()) + "/" + String.valueOf(figure.getTasksToComplete());
                 return navratovytext;
             } else {
                 Item wantedItem = (Item)figure.getTasks().get(figure.getCurrentTask());
@@ -62,8 +62,8 @@ public class CommandTalk implements ICommand {
                     return "Uz nemam pre teba ulohy, vsetky si splnil";
                 }
                 if (plan.getCurrentLocation().containsItem(wantedItem.getName())) {
-                    figure.incCompletedTasks();
                     plan.getCurrentLocation().removeItem(wantedItem.getName());
+                    figure.incCompletedTasks();
                     if (figure.getCompletedTasks() == figure.getTasksToComplete()) {
                         navratovytext += figure.getAnswer();
                         if (figure.getName().equals("kuzelnik")) {
@@ -84,12 +84,12 @@ public class CommandTalk implements ICommand {
                         tasknumber = figure.getTasksToComplete() - figure.getCompletedTasks() - 1;
                         figure.setCurrentTask(tasks[tasknumber]);
                         navratovytext += figure.getVoiceLines().get("task" + String.valueOf(figure.getTalkTimes())) + figure.getCurrentTask() + 
-                            "\n" + String.valueOf(figure.getCompletedTasks()) + "/" + String.valueOf(figure.getTasksToComplete());
+                            "\n" + "Splnené úlohy : " + String.valueOf(figure.getCompletedTasks()) + "/" + String.valueOf(figure.getTasksToComplete());
                     }
                     return navratovytext;
                 } else { 
                     figure.decTalkTimes();
-                    return "To co chcem sa tu nenachadza, ulohu si este nesplnil " + figure.getTalkTimes();
+                    return "To co chcem sa tu nenachadza, ulohu si este nesplnil";
                 }
             }
         } else {
@@ -107,5 +107,9 @@ public class CommandTalk implements ICommand {
     @Override
     public String getName() {
         return NAME;
+    }
+    @Override
+    public String toString() {
+    	return getName();
     }
 }

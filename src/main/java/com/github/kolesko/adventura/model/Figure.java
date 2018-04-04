@@ -2,7 +2,7 @@ package com.github.kolesko.adventura.model;
 import java.util.*;
 
     
-public class Figure
+public class Figure extends Observable
 {
     private String name;
     private String text;
@@ -29,6 +29,7 @@ public class Figure
         this.tasksToComplete = 0;
         this.talkTimes = 0;
         this.completedTasks = 0;
+        this.currentTask = "";
     }
  
     /**
@@ -84,6 +85,8 @@ public class Figure
      * vracia ulohu ktoru zadal hracovi ako poslednu
      */
     public String getCurrentTask() {
+    	/*setChanged();
+        notifyObservers();*/
         return currentTask;
     }
     /**
@@ -92,6 +95,8 @@ public class Figure
      */
     public void setCurrentTask(String task) {
         this.currentTask = task;
+        setChanged();
+        notifyObservers();
     }
     /**
      * inkrementuje pocet kolko krat hrac hovoril s postavou
@@ -111,6 +116,8 @@ public class Figure
      */
     public void incCompletedTasks() {
         this.completedTasks += 1;
+        setChanged();
+        notifyObservers();
     }
     /**
      * pridanie novej ulohy ku postave

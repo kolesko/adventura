@@ -12,7 +12,7 @@ import java.util.*;
  * @author     Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova, Jan Riha
  * @version    LS 2016/2017
  */
-public class GamePlan {
+public class GamePlan extends Observable{
     private static final String FINAL_LOCATION_NAME = "domov";
     private Location currentLocation;
     private Inventory inventory;
@@ -34,17 +34,17 @@ public class GamePlan {
         // vytvářejí se jednotlivé lokace
         inventory = new Inventory();
         life = new Life();
-        Location dvor = new Location("dvor","Tvoj dvor, z ktoreho sa vies dostat domov po splneni uloh");
-        Location domov = new Location(FINAL_LOCATION_NAME, "domov, kde byvas, zaroven ciel");
-        Location jaskyna = new Location("jaskyna","stará plesnivá jeskyně");
-        Location les = new Location("les","les s jahodami, malinami a pramenem vody");
-        Location hlbokyLes = new Location("hlboky_les","temný les, ve kterém lze potkat vlka");
-        Location jazero = new Location("jazero","jazero pri ktorom byva kuzelnik");
-        Location kuzelnikov_dom = new Location("kuzelnikov_dom", "dom, v ktorom byva kuzelnik");
-        Location kuzelna_jablon = new Location("kuzelna_jablon", "jablon, z jej jablk si vies doplnit zivot");
-        Location luka = new Location("luka", "luka, na ktorej sa nachadzaju rastliny");
-        Location rozcestnik = new Location("rozcestnik", "rozcestnik");
-        Figure kuzelnik = new Figure("kuzelnik", "Ahoj, ja som kuzelnik.","Dakujem, vchod do jaskyne je hned za mojim domom, a v lese.\nTaktiez som ti dal pristup ku kuzelnej jabloni.");
+        Location dvor = new Location("dvor","Tvoj dvor, z ktoreho sa vies dostat domov po splneni uloh",0,0);
+        Location domov = new Location(FINAL_LOCATION_NAME, "domov, kde byvas, zaroven ciel",0,0);
+        Location jaskyna = new Location("jaskyna","stará plesnivá jeskyně",0,0);
+        Location les = new Location("les","les s jahodami, malinami a pramenem vody",0,0);
+        Location hlbokyLes = new Location("hlboky_les","temný les, ve kterém lze potkat vlka",0,0);
+        Location jazero = new Location("jazero","jazero pri ktorom byva kuzelnik",0,0);
+        Location carodejnickyn_dom = new Location("carodejnickyn_dom", "dom, v ktorom byva kuzelnik",0,0);
+        Location kuzelna_jablon = new Location("kuzelna_jablon", "jablon, z jej jablk si vies doplnit zivot",0,0);
+        Location luka = new Location("luka", "luka, na ktorej sa nachadzaju rastliny",0,0);
+        Location rozcestnik = new Location("rozcestnik", "rozcestnik",0,0);
+        Figure kuzelnik = new Figure("carodejnicka", "Ahoj, ja som čarodejníčka.","Dakujem, vchod do jaskyne je hned za mojim domom, a v lese.\nTaktiez som ti dal pristup ku kuzelnej jabloni.");
         Figure skriatok = new Figure ("skriatok", "HAHAHAHA, tvoj kluc od domu mam ja a ked mi nesplnis moje ulohy tak ho nedostanes.", "Splnil si vsetky ulohy, tu mas kluc mozes ist domov.");
         Item jablko = new Item("jablko", "obycajne jablko ktore doplna 1 zivot", true);
         Item kuzelne_jablko = new Item("kuzelne_jablko", "kuzelne jablko ktore doplna 4 zivoty", true);
@@ -61,7 +61,7 @@ public class GamePlan {
         locations.put(les.getName(), les);
         locations.put(hlbokyLes.getName(), hlbokyLes);
         locations.put(jazero.getName(), jazero);
-        locations.put(kuzelnikov_dom.getName(), kuzelnikov_dom);
+        locations.put(carodejnickyn_dom.getName(), carodejnickyn_dom);
         locations.put(kuzelna_jablon.getName(), kuzelna_jablon);
         locations.put(luka.getName(), luka);
         locations.put(rozcestnik.getName(), rozcestnik);
@@ -72,13 +72,13 @@ public class GamePlan {
         rozcestnik.addExit(les);
         rozcestnik.addExit(dvor);
         les.addExit(rozcestnik);
-        jazero.addExit(kuzelnikov_dom);
-        kuzelnikov_dom.addExit(hlbokyLes);
-        kuzelnikov_dom.addExit(jazero);
+        jazero.addExit(carodejnickyn_dom);
+        carodejnickyn_dom.addExit(hlbokyLes);
+        carodejnickyn_dom.addExit(jazero);
         jazero.addExit(rozcestnik);
         hlbokyLes.addExit(luka);
         hlbokyLes.addExit(les);
-        hlbokyLes.addExit(kuzelnikov_dom);
+        hlbokyLes.addExit(carodejnickyn_dom);
         les.addExit(hlbokyLes);
         luka.addExit(hlbokyLes);
         
@@ -111,7 +111,7 @@ public class GamePlan {
         
         kuzelnik.addTask("Ulohou je doniest mi bylinky z luky.", bylinky);
         kuzelnik.addVoiceLine("task1", "Ak chces vediet cestu ku jaskyni a pristup ku jabloni musis splnit moju ulohu. ");
-        kuzelnikov_dom.addFigure(kuzelnik);
+        carodejnickyn_dom.addFigure(kuzelnik);
         
         currentLocation = dvor;  // hra začíná na dvore  
     }
@@ -180,6 +180,9 @@ public class GamePlan {
      */
     public void setCurrentLocation(Location location) {
        currentLocation = location;
+       setChanged();
+       notifyObservers();
     }
+
 
 }

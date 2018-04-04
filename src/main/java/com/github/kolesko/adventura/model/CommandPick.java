@@ -77,4 +77,8 @@ public class CommandPick implements ICommand
             return "Predmet sa neda zobrat"; 
         }
     }
+    @Override
+    public String toString() {
+    	return getName();
+    }
 }

@@ -2,6 +2,9 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package com.github.kolesko.adventura.model;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Observable;
 /**
  * Toto je hlavní třída logiky aplikace. Třída vytváří instanci třídy
  * GamePlan, která inicializuje lokace hry a vytváří seznam platných
@@ -14,7 +17,7 @@ package com.github.kolesko.adventura.model;
  * @version    ZS 2017/2018
  */
 
-public class Game implements IGame
+public class Game extends Observable implements IGame
 {
     private ListOfCommands listOfCommands;
     private GamePlan gamePlan;
@@ -48,7 +51,8 @@ public class Game implements IGame
     public String getProlog()
     {
         return "Vítejte!\n" +
-               "Toto je příběh o Červené Karkulce, babičce a vlkovi.\n" +
+               "Škriatok vám zobral kľúč od vášho domu. Aby ste sa tam dostali musíte splniť jeho úlohy.\n" +
+               "Začnite príkazom 'mluv skriatok' a ďalej už budete vedieť čo máte robiť.\n" +
                "Napište 'napoveda', pokud si nevíte rady, jak hrát dál.\n" +
                "\n" +
                gamePlan.getCurrentLocation().getFullDescription() + "\n" + "Tvoj zivot: " + gamePlan.getStatLife();
@@ -119,6 +123,8 @@ public class Game implements IGame
             result = "Nevím, co tím myslíš. Tento příkaz neznám.";
         }
         
+        setChanged();
+        notifyObservers();
         return result;
     }
 
@@ -144,4 +150,9 @@ public class Game implements IGame
     {
         return gamePlan;
     }
+
+	public ListOfCommands getListOfCommands() {
+		return listOfCommands;
+	}
+
 }

@@ -49,8 +49,8 @@ public class LocationTest
      */
     @Test
     public  void testLzeProjit() {		
-        Location lokace1 = new Location("hala", "vstupní hala budovy VŠE na Jižním městě");
-        Location lokace2 = new Location("bufet", "bufet, kam si můžete zajít na svačinku");
+        Location lokace1 = new Location("hala", "vstupní hala budovy VŠE na Jižním městě",0,0);
+        Location lokace2 = new Location("bufet", "bufet, kam si můžete zajít na svačinku",0,0);
         lokace1.addExit(lokace2);
         lokace2.addExit(lokace1);
         assertEquals(lokace2, lokace1.getExitLocation("bufet"));

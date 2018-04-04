@@ -58,4 +58,8 @@ public class CommandDrop implements ICommand
         }
         
     }
+    @Override
+    public String toString() {
+    	return getName();
+    }
 }

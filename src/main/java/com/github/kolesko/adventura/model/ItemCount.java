@@ -35,6 +35,12 @@ public class ItemCount
     public void decCount() {
         count--;
     }
+    @Override
+    	public String toString() {
+    		if(count == 1) {
+    			return item.getName();
+    		} else return item.getName() + " (" + count + "x)"; 
+    	}
     // == Nesoukromé metody (instancí i třídy) ======================
 
     // == Soukromé metody (instancí i třídy) ========================

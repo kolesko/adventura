@@ -1,10 +1,13 @@
 package com.github.kolesko.adventura.model;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 
 
-public class Inventory
+public class Inventory extends Observable
 {
     private Map<String, ItemCount> items;
     private int storageSize;
@@ -28,6 +31,8 @@ public class Inventory
                 items.get(item.getItem().getName()).incCount();
             } 
     }
+        setChanged();
+        notifyObservers();
     }
     /**
      * vymazavanie predmetu z inventara na zaklade mena(kluca)
@@ -35,15 +40,21 @@ public class Inventory
      * @return item ktory sa vymazal
      */
     public ItemCount removeItem(String itemName){
-        if(items.get(itemName) != null){
-            if (items.get(itemName).getCount() > 1) {
+        if (items.get(itemName).getCount() > 1) {
                 items.get(itemName).decCount();
+                setChanged();
+                notifyObservers();
                 return items.get(itemName);
-            } else return items.remove(itemName);
-        } return null;
+            } else {
+            	ItemCount item = items.remove(itemName);
+                setChanged();
+                notifyObservers();
+            	return item;
+            }
     }
     public ItemCount removeItems(String itemName) {
-         return items.remove(itemName);
+    	 ItemCount item = items.remove(itemName);
+         return item;
     }
     /**
      * zistuje ci sa nachadza predmet v inventari pomocou nazvu(kluca)
@@ -109,5 +120,9 @@ public class Inventory
      */
     public void setStorageSize(int storageSize) {
         this.storageSize = storageSize;
+    }
+    
+    public Collection<ItemCount> getVeci() {
+    	return Collections.unmodifiableCollection(items.values());
     }
 }

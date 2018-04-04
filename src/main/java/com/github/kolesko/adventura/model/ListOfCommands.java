@@ -2,6 +2,8 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package com.github.kolesko.adventura.model;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,5 +77,7 @@ public class ListOfCommands {
         }
         return seznam;
     }
-    
+    public Collection<String> getCommands() {
+    	return Collections.unmodifiableCollection(commandsMap.keySet());
+    }
 }

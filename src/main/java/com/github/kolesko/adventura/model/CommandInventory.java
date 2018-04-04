@@ -41,4 +41,8 @@ public class CommandInventory implements ICommand
         }
         
     }
+    @Override
+    public String toString() {
+    	return getName();
+    }
 }

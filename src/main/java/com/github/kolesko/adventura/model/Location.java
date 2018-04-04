@@ -3,11 +3,14 @@
 package com.github.kolesko.adventura.model;
 
 import java.util.Collection;
+import java.util.Observable;
 import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -23,13 +26,15 @@ import java.util.HashMap;
  * @author     Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova, Jan Riha
  * @version    LS 2016/2017
  */
-public class Location {
+public class Location extends Observable{
 
     private String name;
     private String description;
     private Figure figure;
     private Set<Location> exits;   // obsahuje sousední lokace
     private Map<String, ItemCount> items;
+    private double x;
+	private double y;
     /**
      * Vytvoření lokace se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
@@ -37,12 +42,14 @@ public class Location {
      * @param    name nazev lokace, jednoznačný identifikátor, jedno slovo nebo víceslovný název bez mezer
      * @param    description Popis lokace
      */
-    public Location(String name, String description) {
+    public Location(String name, String description, double x, double y) {
         this.name = name;
         this.description = description;
         exits = new HashSet<>();
         items = new HashMap<>();
         figure = null;
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -81,8 +88,12 @@ public class Location {
             String itemName = item.getItem().getName();
             if (!items.containsKey(item.getItem().getName())) {
                 items.put(itemName,item);
+            } else {
+            	items.get(item.getItem().getName()).incCount();
             }
         }
+        setChanged();
+        notifyObservers();
     }
     /**
      * Vymazuje predmet z lokacie ked sa tam nachadza
@@ -136,6 +147,10 @@ public class Location {
             return figure;
         }
         return null;
+    }
+    
+    public Figure getFigure2() {
+    	return figure;
     }
     /**
      * Metoda equals pro porovnání dvou lokací. Překrývá se metoda equals ze
@@ -263,7 +278,7 @@ public class Location {
         vracenyText += figure.getName();
         return vracenyText;
     }
-
+ 
     /**
      * Vrací lokaci, která sousedí s aktuální lokací a jejíž název je zadán
      * jako parametr. Pokud lokace s udaným jménem nesousedí s aktuální
@@ -296,4 +311,28 @@ public class Location {
     public Collection<Location> getExitLocations() {
         return Collections.unmodifiableCollection(exits);
     }
+    
+    public Collection<ItemCount> getVeci() {
+    	return Collections.unmodifiableCollection(items.values());
+    }
+    
+    public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+	@Override
+	public String toString() {
+		return name;
+	}
 }

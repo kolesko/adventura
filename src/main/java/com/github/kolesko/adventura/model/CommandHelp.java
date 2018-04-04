@@ -31,8 +31,8 @@ public class CommandHelp implements ICommand {
      */
     @Override
     public String process(String... parametry) {
-        return "Tvým úkolem je dovést Červenou Karkulku z domečku\n"
-        + "až k babičce, která bydlí v chaloupce za lesem.\n"
+        return "Tvojou úlohou je dostať sa do svojho domu.\n"
+        + "Ak sa tam chceš dostať musíš splniť škriatkové úlohy.\n"
         + "\n"
         + "Můžeš zadat tyto příkazy:\n"
         + listOfCommands.getCommandNames();
@@ -47,5 +47,8 @@ public class CommandHelp implements ICommand {
       public String getName() {
         return NAME;
      }
-
+    @Override
+    public String toString() {
+    	return getName();
+    }
 }
