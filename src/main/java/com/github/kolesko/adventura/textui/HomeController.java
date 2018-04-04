@@ -92,15 +92,7 @@ public class HomeController extends GridPane implements Observer {
 			String vstupniTextS = vstupniText.getValue();
 			String vystupPrikazu = "";
 			if (vstupnyPrikaz.getValue() == "napoveda") {
-				String url = getClass().getResource("napoveda.html").toExternalForm();
-				WebView webView = new WebView();
-				WebEngine engine = webView.getEngine();
-				engine.load(url);
-				Scene scene = new Scene(webView, 500, 150);
-				Stage stage = new Stage();
-				stage.setScene(scene);
-				stage.setTitle("Nápoveda");
-				stage.show();
+				napoveda();
 			} else if (vstupniTextS != null && vstupniTextS != vstupniText.getPromptText()) {
 				vystupPrikazu = hra.processCommand(vstupnyPrikaz.getValue() + " " + vstupniTextS);
 				vystup.appendText("\n----------\n"+vstupnyPrikaz.getValue() + " " + vstupniText.getValue()+"\n----------\n");
@@ -121,6 +113,18 @@ public class HomeController extends GridPane implements Observer {
 			odosli.setDisable(true);
 			vystup.appendText("\n" + hra.getEpilog());
 		}
+	}
+	
+	@FXML public void napoveda() {
+		String url = getClass().getResource("napoveda.html").toExternalForm();
+		WebView webView = new WebView();
+		WebEngine engine = webView.getEngine();
+		engine.load(url);
+		Scene scene = new Scene(webView, 500, 150);
+		Stage stage = new Stage();
+		stage.setScene(scene);
+		stage.setTitle("Nápoveda");
+		stage.show();
 	}
 	
 	/**

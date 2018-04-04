@@ -37,11 +37,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#novaHra" text="Nová hra" />
               <MenuItem mnemonicParsing="false" onAction="#konecHry" text="Konec Hry" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#napoveda" text="Nápoveda" />
             </items>
           </Menu>
         </menus>
