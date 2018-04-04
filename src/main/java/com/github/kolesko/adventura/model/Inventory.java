@@ -73,6 +73,12 @@ public class Inventory extends Observable
         }
         return null;
     }
+    public ItemCount getContainsItemCount(String itemName) {
+        if (items.get(itemName) != null) {
+            return items.get(itemName);
+        }
+        return null;
+    }
     /**
      * vracia retazec so vsetkymi predmetami ktore sa nachadzaju v inventari
      */

@@ -123,9 +123,49 @@
                   <Image url="@plan1.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="invimg" fitHeight="150.0" fitWidth="200.0" layoutX="68.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@inv.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="uzivatel" fitHeight="25.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@character.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="batohimg" fitHeight="50.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@batoh.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="jablkoimg" fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@jablko.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="loptaimg" fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@lopta.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="kuzelneimg" fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@kuzelne_jablko.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="prstenimg" fitHeight="150.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@prsten.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="klucimg" fitHeight="150.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@kluc.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="bylinkyimg" fitHeight="40.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@bylinky.png" />
                </image>
             </ImageView>
          </children>

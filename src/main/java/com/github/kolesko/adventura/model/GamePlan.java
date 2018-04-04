@@ -36,12 +36,12 @@ public class GamePlan extends Observable{
         life = new Life();
         Location dvor = new Location("dvor","Tvoj dvor, z ktoreho sa vies dostat domov po splneni uloh",118.0,89.0);
         Location domov = new Location(FINAL_LOCATION_NAME, "domov, kde byvas, zaroven ciel",116.0,70.0);
-        Location jaskyna = new Location("jaskyna","stará plesnivá jeskyně",0,0);
+        Location jaskyna = new Location("jaskyna","stará plesnivá jeskyně",104.0,185.0);
         Location les = new Location("les","les s jahodami, malinami a pramenem vody",158.0,161.0);
         Location hlbokyLes = new Location("hlboky_les","temný les",155.0,220.0);
         Location jazero = new Location("jazero","jazero pri ktorom byva carodejnicka",23.0,173.0);
         Location carodejnickyn_dom = new Location("carodejnickyn_dom", "dom, v ktorom byva kuzelnik",95.0,235.0);
-        Location kuzelna_jablon = new Location("kuzelna_jablon", "jablon, z jej jablk si vies doplnit zivot",0,0);
+        Location kuzelna_jablon = new Location("kuzelna_jablon", "jablon, z jej jablk si vies doplnit zivot",91.0,262.0);
         Location luka = new Location("luka", "luka, na ktorej sa nachadzaju rastliny",203.0,274.0);
         Location rozcestnik = new Location("rozcestnik", "rozcestnik",115.0,134.0);
         Figure kuzelnik = new Figure("carodejnicka", "Ahoj, ja som čarodejníčka.","Dakujem, vchod do jaskyne je hned za mojim domom, a v lese.\nTaktiez som ti dal pristup ku kuzelnej jabloni.");
