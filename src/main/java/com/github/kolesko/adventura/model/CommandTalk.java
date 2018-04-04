@@ -66,13 +66,13 @@ public class CommandTalk implements ICommand {
                     figure.incCompletedTasks();
                     if (figure.getCompletedTasks() == figure.getTasksToComplete()) {
                         navratovytext += figure.getAnswer();
-                        if (figure.getName().equals("kuzelnik")) {
-                            plan.getLocation("kuzelnikov_dom").addExit(plan.getLocation("jaskyna"));
+                        if (figure.getName().equals("carodejnicka")) {
+                            plan.getLocation("carodejnickyn_dom").addExit(plan.getLocation("jaskyna"));
                             plan.getLocation("les").addExit(plan.getLocation("jaskyna"));
-                            plan.getLocation("jaskyna").addExit(plan.getLocation("kuzelnikov_dom"));
+                            plan.getLocation("jaskyna").addExit(plan.getLocation("carodejnickyn_dom"));
                             plan.getLocation("jaskyna").addExit(plan.getLocation("les"));
-                            plan.getLocation("kuzelnikov_dom").addExit(plan.getLocation("kuzelna_jablon"));
-                            plan.getLocation("kuzelna_jablon").addExit(plan.getLocation("kuzelnikov_dom"));
+                            plan.getLocation("carodejnickyn_dom").addExit(plan.getLocation("kuzelna_jablon"));
+                            plan.getLocation("kuzelna_jablon").addExit(plan.getLocation("carodejnickyn_dom"));
                         } else {
                             Item kluc = new Item("kluc", "kluc od tvojho domu", true);
                             plan.getLocation("dvor").addItem(new ItemCount(kluc,1));

@@ -116,8 +116,8 @@ public class Figure extends Observable
      */
     public void incCompletedTasks() {
         this.completedTasks += 1;
-        setChanged();
-        notifyObservers();
+        /*setChanged();
+        notifyObservers();*/
     }
     /**
      * pridanie novej ulohy ku postave

@@ -2,6 +2,7 @@ package com.github.kolesko.adventura.textui;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.io.Console;
 import java.util.ArrayList;
 
 import com.github.kolesko.adventura.model.IGame;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
@@ -35,8 +37,12 @@ public class HomeController extends GridPane implements Observer {
 	@FXML private ListView<String> zadaneUlohy;
 	@FXML private ComboBox<String> vstupnyPrikaz;
 	@FXML private Button odosli;
+	@FXML private ImageView plan;
 	
 	private IGame hra;
+	private int tro = 0;
+	private int tru = 0;
+		
 	
 	/**
 	 * metoda čte příkaz ze vstupního textového pole
@@ -115,22 +121,36 @@ public class HomeController extends GridPane implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		seznamVeciMistnost.getItems().clear();
 		seznamVychodu.getItems().clear();
-		//obsahBatohu.getItems().clear();
 		seznamVeciMistnost.getItems().addAll(hra.getGamePlan().getCurrentLocation().getVeci());
 		seznamVychodu.getItems().addAll(hra.getGamePlan().getCurrentLocation().getExitLocations());
 		Figure figure = hra.getGamePlan().getCurrentLocation().getFigure2();
 		if (figure != null && figure.getCurrentTask() != "") {
-			if (figure.getCompletedTasks() != 0)
-				if (figure.getName() == "carodejnicka" && zadaneUlohy.getItems().size() > 1) {
-					zadaneUlohy.getItems().remove(1);
-				} else {
-					if (figure.getName() != "carodejnicka")
-						zadaneUlohy.getItems().remove(0);
+			if (figure.getCompletedTasks() != 0 && figure.getCompletedTasks() != figure.getTasksToComplete()) {
+				if (zadaneUlohy.getItems().get(0).contains("skriatok") && figure.getName().equals("skriatok")){
+					zadaneUlohy.getItems().remove(0); tru = 0;
+				} else if (figure.getName().equals("skriatok")) { zadaneUlohy.getItems().remove(1); tru = 0;}
+			}
+			if (figure.getCompletedTasks() == figure.getTasksToComplete()) {
+				if (figure.getName().equals("skriatok")) {
+					zadaneUlohy.getItems().clear();
+					plan.setImage(new Image(getClass().getResource("plan3.png").toExternalForm()));
 				}
-			if (zadaneUlohy.getItems().size() == 1 && figure.getName().equals("carodejnicka") && figure.getCompletedTasks() == 0)
+				if (figure.getName() == "carodejnicka" && zadaneUlohy.getItems().get(0).contains("carodejnicka")) {
+					zadaneUlohy.getItems().remove(0); plan.setImage(new Image(getClass().getResource("plan2.png").toExternalForm()));
+				} else if (figure.getName() == "carodejnicka" && zadaneUlohy.getItems().size() > 1) { zadaneUlohy.getItems().remove(1); plan.setImage(new Image(getClass().getResource("plan2.png").toExternalForm()));}
+			}
+			/*if (zadaneUlohy.getItems().size() == 1 && figure.getName().equals("carodejnicka") && figure.getCompletedTasks() == 0 && tro == 0)
+				zadaneUlohy.getItems().add(figure.getName() + ": " + figure.getCurrentTask());*/
+			if (tro == 0 && figure.getName().equals("carodejnicka")) {
 				zadaneUlohy.getItems().add(figure.getName() + ": " + figure.getCurrentTask());
-			if (zadaneUlohy.getItems().size() < 1) {
+			}
+			if (tru == 0 && figure.getName().equals("skriatok")) {
 				zadaneUlohy.getItems().add(figure.getName() + ": " + figure.getCurrentTask());
+			}
+			if (figure.getName().equals("carodejnicka")) {
+				tro = 1;
+			} else {
+				tru = 1;
 			}
 		}
 		uzivatel.setX(hra.getGamePlan().getCurrentLocation().getX());
@@ -152,22 +172,34 @@ public class HomeController extends GridPane implements Observer {
 		switch(value) {
 			case "vrat" : {
 				for(int i = 0; i < inv.size(); i++)
-					vstupniText.getItems().add(inv.get(i).toString());
+					if (inv.get(i).toString().contains("jablko (")) {
+						if (inv.get(i).toString().contains("kuzelne")) {
+							vstupniText.getItems().add("kuzelne_jablko");
+						} else vstupniText.getItems().add("jablko");
+					} else vstupniText.getItems().add(inv.get(i).toString());
 				break;
 				}
 			case "vezmi" : {
 				for(int i = 0; i < loc.size(); i++)
-					vstupniText.getItems().add(loc.get(i).toString());
+					if (loc.get(i).toString().contains("jablko (")) {
+						vstupniText.getItems().add("jablko");
+					} else vstupniText.getItems().add(loc.get(i).toString());
 				break;
 			}
 			case "pouzi" : {				
 				for(int i = 0; i < inv.size(); i++)
-					vstupniText.getItems().add(inv.get(i).toString());
+					if (inv.get(i).toString().contains("jablko (")) {
+						if (inv.get(i).toString().contains("kuzelne")) {
+							vstupniText.getItems().add("kuzelne_jablko");
+						} else vstupniText.getItems().add("jablko");
+					} else vstupniText.getItems().add(inv.get(i).toString());
 				break;
 			}
 			case "preskumaj" : {
 				for(int i = 0; i < loc.size(); i++)
-					vstupniText.getItems().add(loc.get(i).toString());
+					if (loc.get(i).toString().contains("jablko (")) {
+						vstupniText.getItems().add("jablko");
+					} else vstupniText.getItems().add(loc.get(i).toString());
 				break;
 			}
 			case "mluv" : {

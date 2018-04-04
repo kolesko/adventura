@@ -34,23 +34,23 @@ public class GamePlan extends Observable{
         // vytvářejí se jednotlivé lokace
         inventory = new Inventory();
         life = new Life();
-        Location dvor = new Location("dvor","Tvoj dvor, z ktoreho sa vies dostat domov po splneni uloh",0,0);
-        Location domov = new Location(FINAL_LOCATION_NAME, "domov, kde byvas, zaroven ciel",0,0);
+        Location dvor = new Location("dvor","Tvoj dvor, z ktoreho sa vies dostat domov po splneni uloh",118.0,89.0);
+        Location domov = new Location(FINAL_LOCATION_NAME, "domov, kde byvas, zaroven ciel",116.0,70.0);
         Location jaskyna = new Location("jaskyna","stará plesnivá jeskyně",0,0);
-        Location les = new Location("les","les s jahodami, malinami a pramenem vody",0,0);
-        Location hlbokyLes = new Location("hlboky_les","temný les, ve kterém lze potkat vlka",0,0);
-        Location jazero = new Location("jazero","jazero pri ktorom byva kuzelnik",0,0);
-        Location carodejnickyn_dom = new Location("carodejnickyn_dom", "dom, v ktorom byva kuzelnik",0,0);
+        Location les = new Location("les","les s jahodami, malinami a pramenem vody",158.0,161.0);
+        Location hlbokyLes = new Location("hlboky_les","temný les",155.0,220.0);
+        Location jazero = new Location("jazero","jazero pri ktorom byva carodejnicka",23.0,173.0);
+        Location carodejnickyn_dom = new Location("carodejnickyn_dom", "dom, v ktorom byva kuzelnik",95.0,235.0);
         Location kuzelna_jablon = new Location("kuzelna_jablon", "jablon, z jej jablk si vies doplnit zivot",0,0);
-        Location luka = new Location("luka", "luka, na ktorej sa nachadzaju rastliny",0,0);
-        Location rozcestnik = new Location("rozcestnik", "rozcestnik",0,0);
+        Location luka = new Location("luka", "luka, na ktorej sa nachadzaju rastliny",203.0,274.0);
+        Location rozcestnik = new Location("rozcestnik", "rozcestnik",115.0,134.0);
         Figure kuzelnik = new Figure("carodejnicka", "Ahoj, ja som čarodejníčka.","Dakujem, vchod do jaskyne je hned za mojim domom, a v lese.\nTaktiez som ti dal pristup ku kuzelnej jabloni.");
         Figure skriatok = new Figure ("skriatok", "HAHAHAHA, tvoj kluc od domu mam ja a ked mi nesplnis moje ulohy tak ho nedostanes.", "Splnil si vsetky ulohy, tu mas kluc mozes ist domov.");
         Item jablko = new Item("jablko", "obycajne jablko ktore doplna 1 zivot", true);
         Item kuzelne_jablko = new Item("kuzelne_jablko", "kuzelne jablko ktore doplna 4 zivoty", true);
         Item lopta = new Item("lopta", "lopta ktoru skriatok stratil v hlbokom lese",true);
         Item prsten = new Item("prsten", "zlaty prsten",true);
-        Item batoh = new Item("batoh", "Batoh aby si mohol mat viac ako jeden predmet pri sebe (10)", true);
+        Item batoh = new Item("batoh", "Batoh aby si mohol mat viac ako dva predmety pri sebe (10)", true);
         Item bylinky = new Item("bylinky", "Bylinky, z ktorych vyraba kuzelnik svoje elixiry", true);
         Item stol = new Item("stol", "stol pri ktorom sedi skriatok");
         
@@ -96,8 +96,8 @@ public class GamePlan extends Observable{
         // Skriatkove ulohy
         
         skriatok.addTask("V hlbokom lese mi najdi loptu a dones mi ju", lopta);
-        skriatok.addTask("Dones mi jedno kuzelne jablko", kuzelne_jablko);
-        skriatok.addTask("Z jaskyne mi dones prsten ktory som tam stratil\nDo jaskyne sa dostanes ked splnis kuzelnikovu ulohu", prsten);
+        skriatok.addTask("Dones mi jedno kuzelne jablko\nKu kuzelnej jabloni sa dostanes ked splnis carodejnickynu ulohu", kuzelne_jablko);
+        skriatok.addTask("Z jaskyne mi dones prsten ktory som tam stratil\nDo jaskyne sa dostanes ked splnis carodejnickynu ulohu", prsten);
         
         // Skriatkove voice liny
         
